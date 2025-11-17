@@ -54,10 +54,10 @@ proyecto/
         └── deploy-pages.yml  # Workflow para publicar la carpeta web/ en GitHub Pages
 ```
 
-## Grupo 5
+## Grupo 5 ✨
 
-| integrante | rol / comentario |
-|-----------|-------------------|
-| nombre 1  |                   |
-| nombre 2  |                   |
-| nombre 3  |                   |
+| Nombre                                   | Carrera | Perfil de GitHub                              |
+|------------------------------------------|---------|-----------------------------------------------|
+| Martín Jesús Bonilla Sarmiento 🧠        | CS      | https://github.com/marbs23                   |
+| Annemarie Alejandra Saldarriaga Núñez 💻 | CS      | https://github.com/AnnieSld                  |
+| María Fernanda Lazón Meza 📊             | DS      | https://github.com/maffzz                    |
