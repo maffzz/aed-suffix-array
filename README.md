@@ -4,14 +4,14 @@ Este repositorio corresponde al **Hito 2** del curso de AED, donde se implementa
 
 El trabajo continúa y mantiene la coherencia con el **Hito 1** (informe teórico), en el que se presentan:
 
-- definiciones formales del Suffix Array y estructuras relacionadas
-- motivación y contexto teórico
-- ventajas, desventajas y casos de uso
+- Definiciones formales del Suffix Array y estructuras relacionadas
+- Motivación y contexto teórico
+- Ventajas, desventajas y casos de uso
 
 ## Contenido principal
 
 - `suffix_array.cpp`
-  - implementación del Suffix Array **sin estructuras de la STL** (solo arreglos y funciones propias).
+  - Implementación del Suffix Array **sin estructuras de la STL** (solo arreglos y funciones propias).
   - Construcción del arreglo de sufijos a partir de un texto.
   - Búsqueda de patrones mediante **búsqueda binaria** sobre el Suffix Array.
   - Comentarios que explican cómo el código refleja la definición formal y las complejidades mencionadas en el informe del Hito 1.
@@ -44,8 +44,8 @@ El visualizador permite:
 
 ```text
 proyecto/
-├── suffix_array.cpp        # implementaciín principal en c++
-├── web/                    # visualizador web del Suffix Array
+├── suffix_array.cpp          # Implementaciín principal en C++
+├── web/                      # Visualizador Web del Suffix Array
 │   ├── index.html
 │   ├── style.css
 │   └── app.js
