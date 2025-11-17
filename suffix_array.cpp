@@ -20,10 +20,8 @@ struct sufijo {
 int longitud_cadena(const char* cadena) {
     int n = 0;
     while (cadena[n] != '\0') {
-        n++;
-    }
-    return n;
-}
+        n++; }
+    return n; }
 
 // comparación lexicográfica entre dos sufijos
 // retorna un valor negativo si a < b, cero si son iguales, positivo si a > b
@@ -37,21 +35,18 @@ int comparar_sufijos(const sufijo& a, const sufijo& b) {
     while (s1[i] != '\0' && s2[i] != '\0') {
         if (s1[i] < s2[i]) return -1;
         if (s1[i] > s2[i]) return 1;
-        i++;
-    }
+        i++; }
 
     // si uno termina antes que el otro, el más corto es menor
     if (s1[i] == '\0' && s2[i] == '\0') return 0;
     if (s1[i] == '\0') return -1;
-    return 1;
-}
+    return 1; }
 
 // función para intercambiar dos sufijos en un arreglo
 void intercambiar_sufijos(sufijo& a, sufijo& b) {
     sufijo temp = a;
     a = b;
-    b = temp;
-}
+    b = temp; }
 
 // partición para quicksort sobre el arreglo de sufijos
 int particion(sufijo* arr, int inicio, int fin) {
@@ -61,22 +56,17 @@ int particion(sufijo* arr, int inicio, int fin) {
     for (int j = inicio; j <= fin - 1; j++) {
         if (comparar_sufijos(arr[j], pivote) <= 0) {
             i++;
-            intercambiar_sufijos(arr[i], arr[j]);
-        }
-    }
+            intercambiar_sufijos(arr[i], arr[j]); } }
 
     intercambiar_sufijos(arr[i + 1], arr[fin]);
-    return i + 1;
-}
+    return i + 1; }
 
 // quicksort para ordenar los sufijos de manera lexicográfica
 void quicksort_sufijos(sufijo* arr, int inicio, int fin) {
     if (inicio < fin) {
         int p = particion(arr, inicio, fin);
         quicksort_sufijos(arr, inicio, p - 1);
-        quicksort_sufijos(arr, p + 1, fin);
-    }
-}
+        quicksort_sufijos(arr, p + 1, fin); } }
 
 // función para construir el suffix array a partir de un texto dado como arreglo de chars
 // el resultado se guarda en el arreglo "suffix_array" de tamaño n
@@ -96,20 +86,17 @@ void construir_suffix_array(const char* texto, int* suffix_array) {
     // cada sufijo se representa por su posición inicial en el texto
     for (int i = 0; i < n; i++) {
         lista_sufijos[i].texto = texto;
-        lista_sufijos[i].posicion = i;
-    }
+        lista_sufijos[i].posicion = i; }
 
     // ordenar los sufijos lexicográficamente usando quicksort propio
     quicksort_sufijos(lista_sufijos, 0, n - 1);
 
     // extraer las posiciones ya ordenadas y guardarlas en suffix_array
     for (int i = 0; i < n; i++) {
-        suffix_array[i] = lista_sufijos[i].posicion;
-    }
+        suffix_array[i] = lista_sufijos[i].posicion; }
 
     // liberar la memoria del arreglo de sufijos
-    delete[] lista_sufijos;
-}
+    delete[] lista_sufijos; }
 
 // función auxiliar para comparar un patrón con un sufijo que comienza en una posición dada
 // retorna un valor negativo si el sufijo es menor que el patrón, cero si el patrón coincide
@@ -121,17 +108,15 @@ int comparar_patron_con_sufijo(const char* texto, int posicion_sufijo, const cha
     while (texto[posicion_sufijo + i] != '\0' && patron[i] != '\0') {
         if (texto[posicion_sufijo + i] < patron[i]) return -1;
         if (texto[posicion_sufijo + i] > patron[i]) return 1;
-        i++;
-    }
+        i++; }
 
-    // si se consumió todo el patrón, hay coincidencia al inicio del sufijo
+    // si se consumió el patrón, hay coincidencia al inicio del sufijo
     if (patron[i] == '\0') return 0;
 
     // si el texto terminó antes que el patrón, el sufijo es menor
     if (texto[posicion_sufijo + i] == '\0') return -1;
 
-    return 1;
-}
+    return 1; }
 
 // función para buscar un patrón dentro del texto usando el suffix array
 // se realiza una búsqueda binaria sobre los sufijos
@@ -150,18 +135,15 @@ bool buscar_patron(const char* texto, int* suffix_array, int n, const char* patr
         int comparacion = comparar_patron_con_sufijo(texto, posicion_sufijo, patron);
 
         if (comparacion == 0) {
-            cout << "patron encontrado en la posicion: " << posicion_sufijo << "\n";
-            return true;
-        } else if (comparacion < 0) {
-            izquierda = medio + 1;
-        } else {
-            derecha = medio - 1;
-        }
-    }
+            cout << "patron encontrado en la posicion: " << posicion_sufijo << endl;
+            return true; }
+        else if (comparacion < 0) {
+            izquierda = medio + 1; }
+        else {
+            derecha = medio - 1; } }
 
     cout << "patron no encontrado en el texto\n";
-    return false;
-}
+    return false; }
 
 int main() {
     // texto de ejemplo terminado en '\0'
@@ -193,17 +175,15 @@ int main() {
     // se debe obtener una permutación de las posiciones del texto tal que
     // los sufijos aparezcan en orden lexicográfico, como en el ejemplo de
     // "banana" del informe (con índices adaptados a base 0)
-    cout << "suffix array construido:" << "\n";
+    cout << "suffix array construido:" << endl;
     for (int i = 0; i < n; i++) {
         int pos = suffix_array[i];
-        cout << i << ": " << (texto + pos) << " | posicion original = " << pos << "\n";
-    }
+        cout << i << ": " << (texto + pos) << " | posicion original = " << pos << endl; }
 
-    cout << "\n" << "buscando patron \"" << patron << "\"..." << "\n";
+    cout << endl << "buscando patron \"" << patron << "\"..." << endl;
     buscar_patron(texto, suffix_array, n, patron);
 
     // liberar memoria del suffix array
     delete[] suffix_array;
 
-    return 0;
-}
+    return 0; }
