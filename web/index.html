@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>visualizador de suffix array</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <h1>visualizador de suffix array</h1>
+        <p class="subtitle">explora paso a paso cómo se construye el suffix array y cómo se busca un patrón</p>
+      </header>
+
+      <main class="app-main">
+        <section class="panel panel-input">
+          <h2>1. jugar con un texto</h2>
+          <p class="panel-caption">escribe un texto y un patrón. la página te mostrará paso a paso qué está haciendo el suffix array</p>
+          <label class="field">
+            <span class="field-label">texto</span>
+            <textarea id="texto" rows="3" placeholder="ejemplo: banana"></textarea>
+          </label>
+
+          <label class="field">
+            <span class="field-label">patrón a buscar</span>
+            <input id="patron" type="text" placeholder="ejemplo: ana" />
+          </label>
+
+          <div class="actions">
+            <button id="btnConstruir" class="btn primary">construir suffix array</button>
+            <button id="btnBuscar" class="btn" disabled>buscar patrón</button>
+          </div>
+
+          <p class="hint">
+            consejo: empieza probando con <strong>banana</strong> y patrón <strong>ana</strong>, igual que el informe
+          </p>
+        </section>
+
+        <section class="panel panel-visual">
+          <h2>2. cómo se construye el suffix array</h2>
+          <p class="panel-caption">primero se miran todos los sufijos posibles del texto y luego se ordenan como si fueran palabras en un diccionario</p>
+          <div class="visual-block">
+            <h3>texto original</h3>
+            <div id="textoRender" class="mono-pill"></div>
+            <p class="mini-explain">cada letra del texto tendrá un sufijo que comienza en su posición</p>
+          </div>
+
+          <div class="visual-columns">
+            <div class="visual-block">
+              <h3>sufijos generados</h3>
+              <div id="sufijosLista" class="list"></div>
+            </div>
+
+            <div class="visual-block">
+              <h3>sufijos ordenados lexicográficamente</h3>
+              <div id="sufijosOrdenados" class="list"></div>
+            </div>
+
+            <div class="visual-block">
+              <h3>suffix array (índices)</h3>
+              <div id="suffixArray" class="sa-grid"></div>
+              <p class="mini-explain">aquí solo se guardan las posiciones donde empiezan los sufijos, en el orden del diccionario</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel panel-search">
+          <h2>3. búsqueda binaria del patrón</h2>
+          <p class="panel-caption">ahora usamos el arreglo ordenado para buscar el patrón como si estuviéramos jugando a adivinar un número: siempre vamos al medio del intervalo</p>
+          <div class="visual-columns">
+            <div class="visual-block">
+              <h3>estado de la búsqueda</h3>
+              <div id="pasoActual" class="paso-actual"></div>
+              <ul id="estadoBusqueda" class="timeline"></ul>
+            </div>
+            <div class="visual-block">
+              <h3>resultado</h3>
+              <div id="resultado" class="resultado"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <p>
+          esta interfaz ilustra la definición formal del suffix array: una permutación de las posiciones de los sufijos del texto
+          ordenados lexicográficamente, y la búsqueda de patrones en tiempo aproximado o(m log n) mediante búsqueda binaria
+        </p>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
